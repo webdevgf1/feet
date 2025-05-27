@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&FEET 500 Index Fund - Stepping Into Wealth</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #4A90E2, #87CEEB);
+            background-attachment: fixed;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #FF6B35, #F7931E);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #000;
+        }
+        
+        .header h1 {
+            color: white;
+            text-shadow: 2px 2px 4px #000;
+            font-size: 42px;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .nav-bar {
+            background: #2E86AB;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #000;
+        }
+        
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 8px 12px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+        }
+        
+        .nav-bar a:hover {
+            background: #FF6B35;
+            border: 2px solid white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            background: white;
+            border: 3px solid #000;
+            border-radius: 10px;
+            padding: 15px;
+            height: fit-content;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        }
+        
+        .sidebar h3 {
+            background: linear-gradient(to right, #FF6B35, #F7931E);
+            color: white;
+            margin: -15px -15px 15px -15px;
+            padding: 10px;
+            text-align: center;
+            border-radius: 7px 7px 0 0;
+            border-bottom: 2px solid #000;
+        }
+        
+        .main-content {
+            background: white;
+            border: 3px solid #000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        }
+        
+        .news-item {
+            border-bottom: 2px dashed #ccc;
+            padding: 15px 0;
+            margin-bottom: 15px;
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .news-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2E86AB;
+            margin-bottom: 8px;
+        }
+        
+        .news-date {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .ticker {
+            background: #000;
+            color: #00FF00;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            border: 2px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .ticker-text {
+            animation: scroll-left 30s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .ad-banner {
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 15px 0;
+            border: 3px solid #000;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .chart-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #999;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .breaking-news {
+            background: #FF0000;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            animation: blink 1s infinite;
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 3px solid #000;
+        }
+        
+        .web-ring {
+            background: #FFFF99;
+            border: 2px solid #000;
+            padding: 10px;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .guestbook-btn {
+            background: #32CD32;
+            color: white;
+            border: 3px solid #000;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .visitor-counter {
+            background: #000;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            padding: 5px;
+            text-align: center;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>S&FEET 500 INDEX FUND</h1>
+        <div style="color: white; font-size: 16px; margin-top: 5px;">
+            💰 Stepping Into Wealth Since 2000 💰
+        </div>
+    </div>
+    
+    <div class="nav-bar">
+        <a href="#home">HOME</a>
+        <a href="#performance">PERFORMANCE</a>
+        <a href="#news">TOE NEWS</a>
+        <a href="#research">RESEARCH</a>
+        <a href="#contact">CONTACT</a>
+        <a href="#invest">INVEST NOW!</a>
+    </div>
+    
+    <div class="breaking-news">
+        🚨 BREAKING: S&FEET 500 HITS ALL-TIME HIGH! UP 420% THIS WEEK! 🚨
+    </div>
+    
+    <div class="ticker">
+        <div class="ticker-text">
+            SFEET: $0.0069 (+420.69%) | TOE FUTURES: $13.37 (+69%) | HEEL INDEX: $25.00 (+100%) | BIG TOE COIN: $4.20 (+50%) | ANKLE STOCK: $7.77 (+33%)
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h3>🦶 QUICK LINKS</h3>
+            <div class="ad-banner">
+                FREE TOE ANALYSIS!<br>
+                Click Here For Your<br>
+                Personal Foot Report!
+            </div>
+            
+            <div class="visitor-counter">
+                VISITORS: 1,337,420
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>🎯 TODAY'S TARGETS:</strong><br>
+                • Big Toe: $5.00<br>
+                • Little Toe: $1.25<br>
+                • Heel: $30.00<br>
+                • Arch: $15.50
+            </div>
+            
+            <button class="guestbook-btn">
+                📝 SIGN GUESTBOOK
+            </button>
+            
+            <div class="web-ring">
+                <strong>💍 FOOT WEB RING 💍</strong><br>
+                <a href="#prev">[PREV]</a> |
+                <a href="#random">[RANDOM]</a> |
+                <a href="#next">[NEXT]</a>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <h2 style="color: #2E86AB; text-align: center; border-bottom: 3px solid #FF6B35; padding-bottom: 10px;">
+                📈 LATEST TOE MARKET NEWS 📈
+            </h2>
+            
+            <div class="chart-placeholder">
+                [YOUR CHART IMAGE HERE - S&FEET 500 PERFORMANCE]
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">🚀 S&FEET 500 Breaks Through Resistance at $0.007!</div>
+                <div class="news-date">Posted: May 27, 2025 - 2:30 PM EST</div>
+                <p>In unprecedented trading volume, the S&FEET 500 Index Fund has shattered all previous records, with analysts calling it "the most bullish foot market since the Great Toe Rally of 2003." Lead analyst Dr. Arch Support stated: "We've never seen such strong fundamentals in the podiatric sector."</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">💎 Diamond Hands Report: 85% of Holders Refuse to Sell</div>
+                <div class="news-date">Posted: May 27, 2025 - 11:15 AM EST</div>
+                <p>Latest community survey reveals that 85% of S&FEET holders have "diamond feet" and refuse to sell despite massive gains. Community member @ToeMoonLambo commented: "These aren't just investments, they're stepping stones to generational wealth!"</p>
+            </div>
+            
+            <div class="ad-banner">
+                🔥 HOT TIP: BUY THE DIP ON PINKY TOE FUTURES! 🔥<br>
+                Limited Time Offer - 50% Bonus Tokens!
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">📊 Weekly Foot Market Analysis: Bullish Signals Everywhere</div>
+                <div class="news-date">Posted: May 26, 2025 - 4:45 PM EST</div>
+                <p>Technical analysis shows strong support at the $0.005 level with fibonacci retracements pointing to $0.01 by month end. The "Golden Toe Cross" formation on the daily chart suggests we're entering a new super cycle. Institutional adoption growing with PediCorp announcing 10% portfolio allocation.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">🏆 S&FEET Named "Meme Coin of the Year" by CryptoFeet Magazine</div>
+                <div class="news-date">Posted: May 25, 2025 - 9:00 AM EST</div>
+                <p>In a surprise announcement, CryptoFeet Magazine has awarded S&FEET 500 the prestigious "Golden Sole Award" for innovation in decentralized finance. Editor-in-chief Sarah Pumps noted: "S&FEET has successfully bridged the gap between traditional index investing and modern meme culture."</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">🤝 Major Partnership: S&FEET Teams Up with Dr. Scholl's</div>
+                <div class="news-date">Posted: May 24, 2025 - 2:20 PM EST</div>
+                <p>Breaking: Dr. Scholl's announces strategic partnership with S&FEET 500, planning to accept SFEET tokens for all online purchases. CEO John Comfort stated: "This partnership represents the future of foot care payments. We're excited to step into the crypto space."</p>
+            </div>
+            
+            <div class="chart-placeholder">
+                [YOUR MEME IMAGE HERE - FEET CHARTS TO THE MOON]
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">🔥 Whale Alert: Mystery Buyer Accumulates 69 Million SFEET</div>
+                <div class="news-date">Posted: May 23, 2025 - 7:30 PM EST</div>
+                <p>Blockchain analysts report massive accumulation by wallet address 0xF33T...showing purchase of 69,420,000 SFEET tokens worth approximately $480,000. Community speculates this could be a major fund or celebrity entering the space. Bullish sentiment intensifies.</p>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <h3>💰 INVEST NOW!</h3>
+            <div style="text-align: center; margin: 15px 0;">
+                <strong style="color: #FF6B35; font-size: 24px;">$0.0069</strong><br>
+                <span style="color: green; font-weight: bold;">+420.69% (24h)</span>
+            </div>
+            
+            <div class="ad-banner">
+                🚀 BUY SFEET NOW! 🚀<br>
+                Before It Hits $1!<br>
+                Not Financial Advice*
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>📈 PRICE TARGETS:</strong><br>
+                • Short Term: $0.01<br>
+                • Medium Term: $0.10<br>
+                • Long Term: $1.00<br>
+                • Moon Term: $69.00
+            </div>
+            
+            <div style="background: #FFFFCC; padding: 10px; border: 1px solid #999; margin: 15px 0; border-radius: 5px;">
+                <strong>⚠️ DISCLAIMER:</strong><br>
+                This is not financial advice. This is podiatric advice. Past foot performance does not guarantee future toe results.
+            </div>
+            
+            <div class="ad-banner">
+                FREE EBOOK:<br>
+                "How I Made $1M<br>
+                With Just My Toes"<br>
+                Download Now!
+            </div>
+            
+            <div style="margin: 15px 0; text-align: center;">
+                <div style="background: #000; color: #00FF00; padding: 5px; font-family: monospace;">
+                    HODL CALCULATOR
+                </div>
+                <div style="border: 1px solid #000; padding: 10px;">
+                    If you bought $100 of SFEET<br>
+                    on January 1st, 2025...<br>
+                    <strong style="color: green;">You'd have $42,069 today!</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 S&FEET 500 Index Fund | Not affiliated with Standard & Poor's | This is a parody website for entertainment purposes only</p>
+        <p>🦶 Remember: Always DYOR (Do Your Own Research) and never invest more than you can afford to lose! 🦶</p>
+        <div style="margin-top: 10px; font-size: 12px;">
+            Best viewed in Internet Explorer 6.0 | Optimized for 1024x768 resolution
+        </div>
+    </div>
+</body>
+</html>
