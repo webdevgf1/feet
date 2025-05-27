@@ -538,6 +538,16 @@
                 Limited Time Offer - 50% Bonus Tokens!
             </div>
             
+            <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 20px; margin: 20px 0;">
+                <h3 style="text-align: center; color: #ff006e; font-family: 'Orbitron', monospace; margin-bottom: 15px;">🦶 FEET PONG GAME 🦶</h3>
+                <canvas id="feetPongCanvas" width="400" height="200" style="width: 100%; max-width: 400px; border: 2px solid #ff006e; border-radius: 10px; background: #000; display: block; margin: 0 auto;"></canvas>
+                <div style="text-align: center; margin-top: 10px; color: rgba(255, 255, 255, 0.8); font-size: 12px;">
+                    Use mouse to control your foot paddle! Score points to earn SFEET tokens!*<br>
+                    <span style="font-size: 10px;">*Not actually, this is just for fun</span>
+                </div>
+                <div id="gameScore" style="text-align: center; margin-top: 10px; font-family: 'Orbitron', monospace; color: #00ff41; font-weight: bold;">Score: 0 | High Score: 0</div>
+            </div>
+            
             <div class="news-item">
                 <div class="news-title">📊 Weekly Foot Market Analysis: Bullish Signals Everywhere</div>
                 <div class="news-date">Posted: May 26, 2025 - 4:45 PM EST</div>
@@ -625,5 +635,215 @@
             Best viewed in Internet Explorer 6.0 | Optimized for 1024x768 resolution
         </div>
     </div>
+    
+    <script>
+        // Feet Pong Game
+        const canvas = document.getElementById('feetPongCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Game variables
+        let gameRunning = true;
+        let score = 0;
+        let highScore = localStorage.getItem('feetPongHighScore') || 0;
+        
+        // Game objects
+        const ball = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 8,
+            speedX: 3,
+            speedY: 2,
+            color: '#ff006e'
+        };
+        
+        const playerPaddle = {
+            x: 10,
+            y: canvas.height / 2 - 30,
+            width: 15,
+            height: 60,
+            speed: 5,
+            color: '#00ff41'
+        };
+        
+        const aiPaddle = {
+            x: canvas.width - 25,
+            y: canvas.height / 2 - 30,
+            width: 15,
+            height: 60,
+            speed: 2,
+            color: '#8338ec'
+        };
+        
+        // Mouse control
+        let mouseY = 0;
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseY = ((e.clientY - rect.top) * canvas.height) / rect.height;
+        });
+        
+        // Game functions
+        function drawFoot(x, y, size, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            // Draw foot shape
+            ctx.ellipse(x, y, size * 0.7, size * 0.4, 0, 0, Math.PI * 2);
+            ctx.fill();
+            // Draw toes
+            for (let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.arc(x - size * 0.4 + i * size * 0.2, y - size * 0.3, size * 0.1, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function drawBall() {
+            ctx.fillStyle = ball.color;
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add glow effect
+            ctx.shadowColor = ball.color;
+            ctx.shadowBlur = 10;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+        
+        function drawPaddles() {
+            // Player paddle (foot)
+            drawFoot(playerPaddle.x + 7, playerPaddle.y + playerPaddle.height/2, 20, playerPaddle.color);
+            
+            // AI paddle (foot)
+            drawFoot(aiPaddle.x + 7, aiPaddle.y + aiPaddle.height/2, 20, aiPaddle.color);
+        }
+        
+        function updateGame() {
+            if (!gameRunning) return;
+            
+            // Clear canvas
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Update player paddle position
+            playerPaddle.y = mouseY - playerPaddle.height / 2;
+            if (playerPaddle.y < 0) playerPaddle.y = 0;
+            if (playerPaddle.y > canvas.height - playerPaddle.height) 
+                playerPaddle.y = canvas.height - playerPaddle.height;
+            
+            // Update AI paddle (simple AI)
+            const aiTarget = ball.y - aiPaddle.height / 2;
+            if (aiPaddle.y < aiTarget) aiPaddle.y += aiPaddle.speed;
+            if (aiPaddle.y > aiTarget) aiPaddle.y -= aiPaddle.speed;
+            
+            // Update ball position
+            ball.x += ball.speedX;
+            ball.y += ball.speedY;
+            
+            // Ball collision with top/bottom walls
+            if (ball.y <= ball.radius || ball.y >= canvas.height - ball.radius) {
+                ball.speedY = -ball.speedY;
+            }
+            
+            // Ball collision with player paddle
+            if (ball.x - ball.radius <= playerPaddle.x + playerPaddle.width &&
+                ball.y >= playerPaddle.y && ball.y <= playerPaddle.y + playerPaddle.height &&
+                ball.speedX < 0) {
+                ball.speedX = -ball.speedX;
+                ball.speedX *= 1.05; // Increase speed slightly
+                score += 10;
+            }
+            
+            // Ball collision with AI paddle
+            if (ball.x + ball.radius >= aiPaddle.x &&
+                ball.y >= aiPaddle.y && ball.y <= aiPaddle.y + aiPaddle.height &&
+                ball.speedX > 0) {
+                ball.speedX = -ball.speedX;
+            }
+            
+            // Ball out of bounds (player scores)
+            if (ball.x > canvas.width + ball.radius) {
+                score += 50;
+                resetBall();
+            }
+            
+            // Ball out of bounds (AI scores - game over)
+            if (ball.x < -ball.radius) {
+                gameOver();
+                return;
+            }
+            
+            // Draw everything
+            drawBall();
+            drawPaddles();
+            
+            // Update score display
+            updateScoreDisplay();
+        }
+        
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = Math.random() * (canvas.height - 40) + 20;
+            ball.speedX = -Math.abs(ball.speedX); // Always go left initially
+            ball.speedY = (Math.random() - 0.5) * 4;
+        }
+        
+        function gameOver() {
+            gameRunning = false;
+            if (score > highScore) {
+                highScore = score;
+                try {
+                    localStorage.setItem('feetPongHighScore', highScore);
+                } catch(e) {
+                    // localStorage not available, ignore
+                }
+            }
+            
+            // Draw game over screen
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ff006e';
+            ctx.font = '20px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER!', canvas.width/2, canvas.height/2 - 20);
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.font = '14px Orbitron';
+            ctx.fillText('Click to restart', canvas.width/2, canvas.height/2 + 10);
+            
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px Orbitron';
+            ctx.fillText(`Final Score: ${score}`, canvas.width/2, canvas.height/2 + 30);
+        }
+        
+        function restartGame() {
+            gameRunning = true;
+            score = 0;
+            ball.speedX = 3;
+            ball.speedY = 2;
+            resetBall();
+        }
+        
+        function updateScoreDisplay() {
+            document.getElementById('gameScore').textContent = `Score: ${score} | High Score: ${highScore}`;
+        }
+        
+        // Click to restart
+        canvas.addEventListener('click', () => {
+            if (!gameRunning) {
+                restartGame();
+            }
+        });
+        
+        // Start the game loop
+        function gameLoop() {
+            updateGame();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Initialize
+        updateScoreDisplay();
+        gameLoop();
+    </script>
 </body>
 </html>
