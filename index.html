@@ -353,6 +353,7 @@
             border-radius: 15px;
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+            cursor: pointer;
         }
         
         .guestbook-btn {
@@ -582,70 +583,189 @@
             font-family: 'Orbitron', monospace;
         }
 
-        /* Roadmap */
-        .roadmap-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid #ff006e;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 0 10px 10px 0;
+        /* Modal/Popup Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
         }
 
-        .roadmap-item.completed {
-            border-left-color: #00ff41;
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            color: white;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #ff006e;
+            font-size: 24px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+            transform: scale(1.2);
+        }
+
+        .modal h3 {
+            color: #ff006e;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-area:hover {
+            border-color: #ff006e;
+            background: rgba(255, 0, 110, 0.1);
+        }
+
+        .file-upload-area.dragover {
+            border-color: #00ff41;
             background: rgba(0, 255, 65, 0.1);
         }
 
-        .roadmap-item.in-progress {
-            border-left-color: #ffff00;
-            background: rgba(255, 255, 0, 0.1);
-        }
-
-        .roadmap-title {
-            font-weight: bold;
-            margin-bottom: 5px;
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
             color: #ff006e;
         }
 
-        .roadmap-item.completed .roadmap-title {
-            color: #00ff41;
+        .upload-text {
+            font-size: 16px;
+            margin-bottom: 10px;
         }
 
-        .roadmap-item.in-progress .roadmap-title {
-            color: #ffff00;
-        }
-
-        /* Team section */
-        .team-member {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        .team-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #ff006e, #8338ec);
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .team-name {
-            font-weight: bold;
-            color: #ff006e;
-            margin-bottom: 5px;
-        }
-
-        .team-role {
+        .upload-subtext {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
+            opacity: 0.7;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .modal-btn {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 0, 110, 0.4);
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #ff006e;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .guestbook-form {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ff006e;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #ff006e;
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .form-textarea {
+            height: 80px;
+            resize: vertical;
         }
 
         @media (max-width: 768px) {
@@ -668,14 +788,14 @@
 </head>
 <body>
     <div class="header">
-        <h1>S&FEET INDEX FUND</h1>
+        <h1>S&FEET6900 INDEX FUND</h1>
         <div style="color: white; font-size: 16px; margin-top: 8px; font-family: 'Orbitron', monospace; letter-spacing: 3px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);">
-            CA: SOON
+            CA: 
         </div>
     </div>
     
     <div class="nav-bar">
-        <a href="https://x.com/SFEET6900" target="_blank" class="nav-link twitter-link">
+        <a href="https://x.com/SnFEET6900" target="_blank" class="nav-link twitter-link">
             <span class="nav-text">X / TWITTER</span>
         </a>
         <a href="https://pump.fun/" target="_blank" class="nav-link pump-link">
@@ -705,7 +825,7 @@
     <div class="container">
         <div class="sidebar">
             <h3>🦶 QUICK LINKS</h3>
-            <div class="ad-banner">
+            <div class="ad-banner" onclick="openToeAnalysis()">
                 FREE TOE ANALYSIS!<br>
                 Click Here For Your<br>
                 Personal Foot Report!
@@ -752,15 +872,15 @@
                 </div>
             </div>
             
-            <button class="guestbook-btn">
+            <button class="guestbook-btn" onclick="openGuestbook()">
                 📝 SIGN GUESTBOOK
             </button>
             
-            <div class="web-ring">
+            <div class="web-ring" onclick="openWebRing()">
                 <strong>💍 FOOT WEB RING 💍</strong><br>
-                <a href="#prev">[PREV]</a> |
-                <a href="#random">[RANDOM]</a> |
-                <a href="#next">[NEXT]</a>
+                <a href="#" onclick="event.preventDefault(); navigateWebRing('prev')">[PREV]</a> |
+                <a href="#" onclick="event.preventDefault(); navigateWebRing('random')">[RANDOM]</a> |
+                <a href="#" onclick="event.preventDefault(); navigateWebRing('next')">[NEXT]</a>
             </div>
         </div>
         
@@ -802,51 +922,6 @@
                 Code: FOOTGANG50
             </div>
             
-            <div class="news-item">
-                <div class="news-title">📊 Weekly Foot Market Analysis: Golden Cross Formation Confirmed</div>
-                <div class="news-date">Posted: June 26, 2025 - 4:45 PM EST</div>
-                <p>Technical analysis shows the coveted "Golden Toe Cross" formation on the daily chart, with the 50-day moving average crossing above the 200-day MA. Strong support established at $0.005 level with fibonacci retracements pointing to $0.01 by month end. Institutional adoption growing rapidly with PediCorp announcing 10% portfolio allocation and Foot Locker exploring payment integration.</p>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🏆 S&FEET Named "Meme Coin of the Year" by CryptoFeet Magazine</div>
-                <div class="news-date">Posted: June 25, 2025 - 9:00 AM EST</div>
-                <p>In a surprise announcement, CryptoFeet Magazine has awarded S&FEET 6900 the prestigious "Golden Sole Award" for innovation in decentralized finance. Editor-in-chief Sarah Pumps noted: "S&FEET has successfully bridged the gap between traditional index investing and modern meme culture. Their community engagement metrics are off the charts, with a 420% increase in social mentions this month."</p>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🤝 Major Partnership: S&FEET Teams Up with Dr. Scholl's</div>
-                <div class="news-date">Posted: June 24, 2025 - 2:20 PM EST</div>
-                <p>Breaking: Dr. Scholl's announces strategic partnership with S&FEET 6900, planning to accept SFEET tokens for all online purchases starting Q3 2025. CEO John Comfort stated: "This partnership represents the future of foot care payments. We're excited to step into the crypto space with such an innovative project. Customers will receive 10% discounts when paying with SFEET."</p>
-            </div>
-            
-            <div style="text-align: center; margin: 15px 0;">
-                <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68350a94e5b55073a7be9e67_444444444.png" 
-                     alt="S&FEET 6900 To The Moon Meme" 
-                     style="max-width: 100%; height: auto; border: 3px solid #FF6B35; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.3);">
-                <div style="text-align: center; margin-top: 10px; font-weight: bold; color: #FF6B35;">
-                    🚀 HODLERS BE LIKE: "MY FEET ARE GOING TO THE MOON!" 🌙
-                </div>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🔥 Whale Alert: Mystery Buyer Accumulates 69 Million SFEET</div>
-                <div class="news-date">Posted: June 23, 2025 - 7:30 PM EST</div>
-                <p>Blockchain analysts report massive accumulation by wallet address 0xF33T...6900 showing purchase of 69,420,000 SFEET tokens worth approximately $480,000 at current prices. On-chain data suggests this could be institutional money or a high-profile celebrity entering the space. The community has dubbed this whale "Big Foot" and bullish sentiment continues to intensify across all social platforms.</p>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🎮 S&FEET Gaming Metaverse Announced: "Foot Valley"</div>
-                <div class="news-date">Posted: June 22, 2025 - 1:15 PM EST</div>
-                <p>The S&FEET team has unveiled plans for "Foot Valley," a revolutionary play-to-earn metaverse where players can buy virtual land, breed digital feet NFTs, and participate in toe-based mini-games. Alpha testing begins July 15th for SFEET holders with over 100,000 tokens. Lead developer John Heel stated: "This isn't just gaming, it's the future of foot-based entertainment."</p>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">💰 Staking Rewards Program Launches: Earn 420% APY</div>
-                <div class="news-date">Posted: June 21, 2025 - 10:30 AM EST</div>
-                <p>S&FEET has launched their highly anticipated staking program on their official DApp. Early stakers can earn up to 420% APY for the first month, with rewards distributed in SFEET tokens. The program features flexible lock periods from 30 days to 1 year, with higher APY for longer commitments. Over $2M worth of SFEET has already been staked in the first 24 hours.</p>
-            </div>
-            
             <h2 id="conspiracy" style="margin-top: 40px;">🕵️ FEET PIC CONSPIRACY REPORTS 🕵️</h2>
             
             <div class="news-item">
@@ -878,25 +953,6 @@
                 <p>Leaked internal documents from Meta, Google, and TikTok reveal coordinated efforts to create "scarcity" in the foot content market. The conspiracy runs deep: algorithms are deliberately suppressing free foot content while promoting paid platforms. Mark Zuckerberg's private emails (obtained through whistleblower "Toe Throat") show plans for a "metaverse feet marketplace" where virtual toe pics could sell for more than real ones. "We're not just selling pictures," one email reads, "we're selling the future of human foot interaction."</p>
             </div>
             
-            <div class="news-item">
-                <div class="news-title">💰 SHOCKING: Celebrities Secretly Funding Foot Pic Inflation</div>
-                <div class="news-date">Posted: June 24, 2025 - 11:20 AM EST</div>
-                <p>An investigation by the Foot Truth Network has uncovered a secret cartel of A-list celebrities artificially inflating foot pic prices. Documents show coordinated price-fixing where stars agree to never sell feet content below $10,000. Quentin Tarantino allegedly serves as the "feet market maker," with a private collection worth over $50 million. One anonymous Hollywood insider leaked: "They're treating feet like fine art. Some collections are worth more than Picassos."</p>
-                <div style="background: rgba(255, 0, 110, 0.1); border-left: 4px solid #ff006e; padding: 10px; margin: 10px 0; border-radius: 5px;">
-                    <strong>🎬 HOLLYWOOD FEET CARTEL MEMBERS (ALLEGED):</strong><br>
-                    • QT - "The Facilitator" (50M+ collection)<br>
-                    • Anonymous A-Lister - "Price Setter"<br>
-                    • Major Studio Head - "Distribution Control"<br>
-                    • Social Media Mogul - "Scarcity Creator"
-                </div>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🏛️ Government Cover-Up: IRS Creating "Toe Tax" Category</div>
-                <div class="news-date">Posted: June 23, 2025 - 6:00 PM EST</div>
-                <p>Leaked IRS documents reveal the government is preparing to classify foot content as "appreciating digital assets" subject to capital gains tax. The new "Form 1040-FEET" will require citizens to report all foot-related income. Former IRS insider "Sole Man" claims: "They know this market is massive. The government wants their cut of every toe pic sold." The conspiracy goes deeper - the new tax code allegedly includes a "strategic foot reserve" clause, suggesting the government may start stockpiling premium foot content.</p>
-            </div>
-            
             <h2 id="research" style="margin-top: 40px;">📊 FEET MARKET RESEARCH 📊</h2>
             
             <div class="news-item">
@@ -913,31 +969,6 @@
                 </div>
             </div>
             
-            <div class="news-item">
-                <div class="news-title">🔬 MIT Study: Foot Aesthetics Predict Economic Performance</div>
-                <div class="news-date">Posted: June 21, 2025 - 1:15 PM EST</div>
-                <p>Groundbreaking research from MIT's Behavioral Economics Lab has discovered a strong correlation between foot aesthetic appreciation and market performance. The study tracked 10,000 investors over 5 years and found that those with "advanced foot appreciation" (AFA) consistently outperformed the S&P 500 by 420%. Professor Janet Heel-Montgomery explains: "Foot appreciation requires pattern recognition, aesthetic judgment, and long-term thinking - the exact skills needed for successful investing."</p>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🌍 Global Foot Index: How Nations Rank by Toe Quality</div>
-                <div class="news-date">Posted: June 20, 2025 - 9:45 AM EST</div>
-                <p>The first-ever Global Foot Quality Index ranks 195 countries by their citizens' average foot aesthetics. Surprisingly, small island nations dominate the top rankings, with Maldives, Seychelles, and Fiji claiming the top spots. The study suggests that beach cultures and minimal footwear lead to superior foot development. Economic analysts note that countries ranking higher on the Foot Index also show stronger GDP growth, leading to the theory that "foot quality drives economic prosperity."</p>
-                <div style="background: rgba(58, 134, 255, 0.1); border-left: 4px solid #3a86ff; padding: 10px; margin: 10px 0; border-radius: 5px;">
-                    <strong>🏆 TOP 10 FOOT NATIONS:</strong><br>
-                    1. Maldives (9.8/10)<br>
-                    2. Seychelles (9.7/10)<br>
-                    3. Fiji (9.6/10)<br>
-                    4. Hawaii (9.5/10)<br>
-                    5. Brazil (9.4/10)<br>
-                    6. Spain (9.3/10)<br>
-                    7. Italy (9.2/10)<br>
-                    8. Greece (9.1/10)<br>
-                    9. Thailand (9.0/10)<br>
-                    10. France (8.9/10)
-                </div>
-            </div>
-            
             <h2 id="analysis" style="margin-top: 40px;">🧠 DEEP MARKET ANALYSIS 🧠</h2>
             
             <div class="news-item">
@@ -946,16 +977,13 @@
                 <p>Market analysts are sounding the alarm about an unprecedented supply-demand imbalance in the global foot content market. While demand has increased 1,200% since 2023, supply has only grown 300%, creating massive price pressure. Industry expert Dr. Toe-bias explains: "We're seeing perfect storm conditions. Everyone wants premium foot content, but there are only so many high-quality feet in the world. Basic economics suggests we're heading for a massive price explosion." Some analysts predict $50,000 toe pics by end of year.</p>
             </div>
             
-            <div class="news-item">
-                <div class="news-title">⚡ AI Revolution: Synthetic Feet Pics Crash Traditional Market</div>
-                <div class="news-date">Posted: June 18, 2025 - 7:00 PM EST</div>
-                <p>The foot pic market is experiencing massive disruption as AI-generated synthetic feet images flood online platforms. Advanced neural networks can now create hyper-realistic toe content that's indistinguishable from real photography. Traditional foot models report 60% income drops as AI feet sell for 90% less than authentic content. However, a counter-movement is emerging with "certified organic feet" commanding even higher premiums. The market is now split between "AI feet maximalists" and "authentic toe purists" in what experts call the "Great Foot War of 2025."</p>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">🏦 Federal Reserve Considers Foot-Backed Currency Standard</div>
-                <div class="news-date">Posted: June 17, 2025 - 12:30 PM EST</div>
-                <p>Leaked Federal Reserve documents suggest serious consideration of moving from the current fiat system to a "foot-backed currency standard." The proposal, codenamed "Operation Golden Toe," would peg the US dollar to a basket of premium foot assets. Fed Chairman Jeremy Powell's private notes state: "Foot assets have shown remarkable stability and consistent appreciation. Unlike gold, feet are renewable, diverse, and inherently valuable to human psychology." Critics argue this could lead to "toe hoarding" and artificial foot scarcity, while supporters claim it would create the most stable currency in human history.</p>
+            <div style="text-align: center; margin: 15px 0;">
+                <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68350a94e5b55073a7be9e67_444444444.png" 
+                     alt="S&FEET 6900 To The Moon Meme" 
+                     style="max-width: 100%; height: auto; border: 3px solid #FF6B35; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.3);">
+                <div style="text-align: center; margin-top: 10px; font-weight: bold; color: #FF6B35;">
+                    🚀 HODLERS BE LIKE: "MY FEET ARE GOING TO THE MOON!" 🌙
+                </div>
             </div>
         </div>
         
@@ -1048,6 +1076,83 @@
         </div>
     </div>
     
+    <!-- Modal Overlays -->
+    <div id="toeAnalysisModal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('toeAnalysisModal')">&times;</button>
+            <h3>🦶 FREE TOE ANALYSIS 🦶</h3>
+            <p>Upload a photo of your feet for professional analysis by our certified foot specialists!</p>
+            
+            <div class="file-upload-area" onclick="document.getElementById('footPhoto').click()">
+                <div class="upload-icon">📸</div>
+                <div class="upload-text">Click to upload or drag & drop</div>
+                <div class="upload-subtext">Accepted formats: JPG, PNG, WEBP (Max 10MB)</div>
+            </div>
+            <input type="file" id="footPhoto" class="file-input" accept="image/*" onchange="handleFileUpload(this)">
+            
+            <div id="uploadResult" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing your magnificent feet...</p>
+                <p style="font-size: 12px; opacity: 0.8;">Our AI is measuring arch height, toe symmetry, and overall aesthetic appeal...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="guestbookModal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('guestbookModal')">&times;</button>
+            <h3>📝 SFEET GUESTBOOK 📝</h3>
+            <p>Leave your mark in the legendary SFEET guestbook!</p>
+            
+            <div class="guestbook-form">
+                <div class="form-group">
+                    <label class="form-label">Name/Handle:</label>
+                    <input type="text" class="form-input" placeholder="Enter your crypto name..." maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message:</label>
+                    <textarea class="form-input form-textarea" placeholder="Share your SFEET journey, price predictions, or foot wisdom..." maxlength="200"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current HODL Status:</label>
+                    <select class="form-input">
+                        <option>💎 Diamond Feet (HODLING)</option>
+                        <option>🚀 Buying More</option>
+                        <option>📈 To The Moon</option>
+                        <option>🦶 Feet Gang Forever</option>
+                        <option>💰 Early Adopter</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="modal-btn" onclick="submitGuestbook()">Sign Guestbook</button>
+        </div>
+    </div>
+
+    <div id="webRingModal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('webRingModal')">&times;</button>
+            <h3>💍 FOOT WEB RING 💍</h3>
+            <div id="webRingContent">
+                <p>Connecting the finest foot-related websites since 1998!</p>
+                <div style="margin: 20px 0; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
+                    <div style="color: #ff006e; font-weight: bold; margin-bottom: 10px;">🔗 Current Ring Members:</div>
+                    <div style="font-size: 14px; line-height: 1.8;">
+                        • ToeCoin.net - Premium Toe Trading<br>
+                        • ArchSupport.org - Foot Health Central<br>
+                        • HeelHeaven.com - Luxury Feet Content<br>
+                        • SoleSearchers.io - Foot Discovery Platform<br>
+                        • ToenailTraders.biz - Nail Art Marketplace<br>
+                        • AnkleAnalytics.xyz - Foot Market Data<br>
+                        • FootFutures.com - Pedal Predictions<br>
+                        • You are here: SFeet6900.xyz ⭐<br>
+                    </div>
+                </div>
+                <p style="font-size: 12px; opacity: 0.8;">Note: Some sites may be temporarily down due to overwhelming foot traffic.</p>
+            </div>
+        </div>
+    </div>
+    
     <div class="footer">
         <p>© 2025 S&FEET 6900 Index Fund | Visit us at sfeet6900.xyz</p>
         <div style="margin-top: 15px;">
@@ -1057,6 +1162,101 @@
     </div>
     
     <script>
+        // Interactive Feature Functions
+        function openToeAnalysis() {
+            document.getElementById('toeAnalysisModal').classList.add('show');
+        }
+
+        function openGuestbook() {
+            document.getElementById('guestbookModal').classList.add('show');
+        }
+
+        function openWebRing() {
+            document.getElementById('webRingModal').classList.add('show');
+        }
+
+        function navigateWebRing(direction) {
+            const messages = {
+                'prev': 'Navigating to previous foot site...\n\n🔗 Redirecting to: ToeCoin.net\n💎 "The Premier Toe Trading Platform"',
+                'random': 'Finding random foot website...\n\n🎲 Redirecting to: HeelHeaven.com\n👠 "Where Premium Feet Dreams Come True"',
+                'next': 'Advancing to next foot site...\n\n➡️ Redirecting to: ArchSupport.org\n🦶 "Your Trusted Foot Health Resource"'
+            };
+            
+            setTimeout(() => {
+                alert(messages[direction] + '\n\n⚠️ Error 404: Site temporarily offline due to excessive foot traffic.\n\nPlease try again later or HODL SFEET instead! 🚀');
+            }, 100);
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+            
+            // Reset toe analysis modal
+            if (modalId === 'toeAnalysisModal') {
+                document.getElementById('uploadResult').style.display = 'none';
+                document.getElementById('footPhoto').value = '';
+            }
+        }
+
+        function handleFileUpload(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+                
+                if (!validTypes.includes(file.type)) {
+                    alert('🚫 Invalid file type! Please upload a JPG, PNG, or WEBP image of your feet.');
+                    return;
+                }
+                
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('🚫 File too large! Please upload an image under 10MB.');
+                    return;
+                }
+                
+                // Show loading animation
+                document.getElementById('uploadResult').style.display = 'block';
+                
+                // Simulate analysis delay
+                setTimeout(() => {
+                    document.getElementById('uploadResult').innerHTML = `
+                        <div style="color: #00ff41; font-size: 18px; margin-bottom: 15px;">✅ UPLOAD SUCCESSFUL!</div>
+                        <div style="background: rgba(0, 255, 65, 0.1); border: 2px solid #00ff41; border-radius: 10px; padding: 15px; margin: 15px 0;">
+                            <div style="font-weight: bold; color: #00ff41; margin-bottom: 10px;">📊 INITIAL SCAN COMPLETE</div>
+                            <div style="font-size: 14px; line-height: 1.6;">
+                                • Foot Type: Detected ✅<br>
+                                • Toe Symmetry: Analyzing... 🔄<br>
+                                • Arch Classification: Processing... 🔄<br>
+                                • Investment Potential: Calculating... 💰<br>
+                                • SFEET Compatibility: 99.9% ✨
+                            </div>
+                        </div>
+                        <div style="color: #ff006e; font-weight: bold;">
+                            🦶 Our certified foot specialists will review your submission and email you a comprehensive report within 24-48 hours!
+                        </div>
+                        <div style="font-size: 12px; margin-top: 10px; opacity: 0.8;">
+                            Check your spam folder for: feet.analysis@sfeet6900.xyz
+                        </div>
+                    `;
+                }, 3000);
+            }
+        }
+
+        function submitGuestbook() {
+            const messages = [
+                "📝 Thank you for signing our guestbook! Your message is now immortalized on the blockchain!",
+                "🚀 Guestbook entry submitted! Your diamond hands energy has been recorded for posterity!",
+                "💎 Message received! You are now officially part of the SFEET hall of fame!",
+                "🦶 Guestbook signed successfully! Your foot wisdom will inspire future generations!",
+                "⭐ Entry complete! Your SFEET spirit is now forever etched in our digital walls!"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            setTimeout(() => {
+                alert(randomMessage + "\n\n🎉 You've also been entered into our monthly 1,000,000 SFEET giveaway!\n\n⚠️ Note: Guestbook is currently experiencing high traffic due to recent moon mission. Your entry may take 2-3 business days to appear.");
+                closeModal('guestbookModal');
+            }, 500);
+        }
+
         // Live Chat Functionality
         class LiveChat {
             constructor() {
@@ -1232,7 +1432,7 @@
             setInterval(updateOnlineCounter, 10000); // Update online count every 10 seconds
             
             // Add click effects to buttons
-            document.querySelectorAll('.ad-banner, .guestbook-btn').forEach(button => {
+            document.querySelectorAll('.ad-banner, .guestbook-btn, .web-ring').forEach(button => {
                 button.addEventListener('click', function() {
                     this.style.transform = 'scale(0.95)';
                     setTimeout(() => {
@@ -1240,6 +1440,40 @@
                     }, 150);
                 });
             });
+
+            // Close modals when clicking outside
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('show');
+                    }
+                });
+            });
+
+            // Drag and drop functionality for file upload
+            const uploadArea = document.querySelector('.file-upload-area');
+            if (uploadArea) {
+                uploadArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('dragover');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        document.getElementById('footPhoto').files = files;
+                        handleFileUpload(document.getElementById('footPhoto'));
+                    }
+                });
+            }
             
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
