@@ -100,6 +100,7 @@
             font-family: 'Orbitron', monospace;
             letter-spacing: 2px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            display: inline-block;
         }
         
         .nav-bar a::before {
@@ -136,31 +137,6 @@
             background: rgba(255, 107, 53, 0.2);
         }
         
-        .nav-glow {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #ff006e);
-            background-size: 400% 400%;
-            border-radius: 32px;
-            z-index: -1;
-            opacity: 0;
-            animation: gradientSpin 3s linear infinite;
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-bar a:hover .nav-glow {
-            opacity: 0.7;
-        }
-        
-        @keyframes gradientSpin {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -180,6 +156,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         
         .sidebar::before {
@@ -336,20 +313,6 @@
             box-shadow: 0 20px 40px rgba(255, 0, 110, 0.5);
         }
         
-        .chart-placeholder {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            border-radius: 15px;
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-        }
-        
         .breaking-news {
             background: linear-gradient(45deg, #ff0040, #ff6b35);
             color: white;
@@ -443,34 +406,299 @@
             color: rgba(255, 255, 255, 0.9);
             font-weight: 400;
         }
+
+        /* Live Chat Styles */
+        .chat-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0;
+            height: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 18px 18px 0 0;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            scrollbar-width: thin;
+            scrollbar-color: #ff006e rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #ff006e;
+            border-radius: 4px;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0 0 18px 18px;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-input:focus {
+            border-color: #ff006e;
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.4);
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+
+        .message.own {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            margin-left: auto;
+            text-align: right;
+            color: white;
+        }
+
+        .message.other {
+            background: rgba(255, 255, 255, 0.1);
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .message .username {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 3px;
+            opacity: 0.8;
+        }
+
+        .message .timestamp {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-top: 3px;
+        }
+
+        .online-counter {
+            background: rgba(0, 255, 65, 0.2);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-family: 'Orbitron', monospace;
+            font-size: 12px;
+            text-align: center;
+            margin: 10px 0;
+            text-shadow: 0 0 10px #00ff41;
+        }
+
+        /* Community Stats */
+        .community-stats {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+        }
+
+        .stat-value {
+            color: #00ff41;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+        }
+
+        /* Roadmap */
+        .roadmap-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #ff006e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .roadmap-item.completed {
+            border-left-color: #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .roadmap-item.in-progress {
+            border-left-color: #ffff00;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .roadmap-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ff006e;
+        }
+
+        .roadmap-item.completed .roadmap-title {
+            color: #00ff41;
+        }
+
+        .roadmap-item.in-progress .roadmap-title {
+            color: #ffff00;
+        }
+
+        /* Team section */
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .team-name {
+            font-weight: bold;
+            color: #ff006e;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .nav-bar a {
+                margin: 0 10px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>S&FEET INDEX FUND</h1>
         <div style="color: white; font-size: 16px; margin-top: 8px; font-family: 'Orbitron', monospace; letter-spacing: 3px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);">
-            CA:
+            CA: SFEET6900420MOON
         </div>
     </div>
     
     <div class="nav-bar">
         <a href="https://x.com/SnFEET6900" target="_blank" class="nav-link twitter-link">
             <span class="nav-text">X / TWITTER</span>
-            <div class="nav-glow"></div>
         </a>
         <a href="https://pump.fun/" target="_blank" class="nav-link pump-link">
             <span class="nav-text">PUMP.FUN</span>
-            <div class="nav-glow"></div>
+        </a>
+        <a href="#whitepaper" class="nav-link">
+            <span class="nav-text">WHITEPAPER</span>
+        </a>
+        <a href="#roadmap" class="nav-link">
+            <span class="nav-text">ROADMAP</span>
+        </a>
+        <a href="#team" class="nav-link">
+            <span class="nav-text">TEAM</span>
         </a>
     </div>
     
     <div class="breaking-news">
-        🚨 BREAKING: S&FEET 6900 HITS ALL-TIME HIGH! UP 420% THIS WEEK! 🚨
+        🚨 BREAKING: S&FEET 6900 HITS ALL-TIME HIGH! UP 420% THIS WEEK! MAJOR CEX LISTING CONFIRMED! 🚨
     </div>
     
     <div class="ticker">
         <div class="ticker-text">
-            SFEET: $0.0069 (+420.69%) | TOE FUTURES: $13.37 (+69%) | HEEL INDEX: $25.00 (+100%) | BIG TOE COIN: $4.20 (+50%) | ANKLE STOCK: $7.77 (+33%)
+            SFEET: $0.0069 (+420.69%) | TOE FUTURES: $13.37 (+69%) | HEEL INDEX: $25.00 (+100%) | BIG TOE COIN: $4.20 (+50%) | ANKLE STOCK: $7.77 (+33%) | ARCH SUPPORT: $12.34 (+25%) | TOENAIL NFT: $0.42 (+15%)
         </div>
     </div>
     
@@ -487,12 +715,41 @@
                 VISITORS: 1,337,420
             </div>
             
+            <div class="online-counter">
+                👥 ONLINE NOW: 6,969
+            </div>
+            
             <div style="margin: 15px 0;">
                 <strong>🎯 TODAY'S TARGETS:</strong><br>
                 • Big Toe: $5.00<br>
                 • Little Toe: $1.25<br>
                 • Heel: $30.00<br>
-                • Arch: $145.50
+                • Arch: $145.50<br>
+                • Toenail: $0.50
+            </div>
+            
+            <div class="community-stats">
+                <h4 style="text-align: center; margin-top: 0; color: #ff006e;">📊 COMMUNITY</h4>
+                <div class="stat-item">
+                    <span class="stat-label">Holders:</span>
+                    <span class="stat-value">42,069</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Transactions:</span>
+                    <span class="stat-value">1,337,420</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Market Cap:</span>
+                    <span class="stat-value">$6.9M</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Burned:</span>
+                    <span class="stat-value">69%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">LP Locked:</span>
+                    <span class="stat-value">100 Years</span>
+                </div>
             </div>
             
             <button class="guestbook-btn">
@@ -522,48 +779,45 @@
             </div>
             
             <div class="news-item">
+                <div class="news-title">🚀 MAJOR EXCHANGE LISTING: S&FEET 6900 Coming to Binance!</div>
+                <div class="news-date">Posted: June 27, 2025 - 3:45 PM EST</div>
+                <p>In a groundbreaking announcement, Binance has confirmed that S&FEET 6900 will be listed on their main exchange starting July 1st, 2025. CEO Changpeng Zhao tweeted: "We're excited to step into the future with S&FEET. This is not just a listing, it's a movement." Trading pairs will include SFEET/USDT, SFEET/BTC, and SFEET/ETH. Early access trading starts tomorrow for VIP users.</p>
+            </div>
+            
+            <div class="news-item">
                 <div class="news-title">🚀 S&FEET 6900 Breaks Through Resistance at $0.007!</div>
-                <div class="news-date">Posted: May 27, 2025 - 2:30 PM EST</div>
-                <p>In unprecedented trading volume, the S&FEET 6900 Index Fund has shattered all previous records, with analysts calling it "the most bullish foot market since the Great Toe Rally of 2003." Lead analyst Dr. Arch Support stated: "We've never seen such strong fundamentals in the podiatric sector."</p>
+                <div class="news-date">Posted: June 27, 2025 - 2:30 PM EST</div>
+                <p>In unprecedented trading volume exceeding $50M in 24 hours, the S&FEET 6900 Index Fund has shattered all previous records, with analysts calling it "the most bullish foot market since the Great Toe Rally of 2003." Lead analyst Dr. Arch Support stated: "We've never seen such strong fundamentals in the podiatric sector. The fibonacci retracements are pointing to a $0.01 target by end of week."</p>
             </div>
             
             <div class="news-item">
                 <div class="news-title">💎 Diamond Hands Report: 85% of Holders Refuse to Sell</div>
-                <div class="news-date">Posted: May 27, 2025 - 11:15 AM EST</div>
-                <p>Latest community survey reveals that 85% of S&FEET holders have "diamond feet" and refuse to sell despite massive gains. Community member @ToeMoonLambo commented: "These aren't just investments, they're stepping stones to generational wealth!"</p>
+                <div class="news-date">Posted: June 27, 2025 - 11:15 AM EST</div>
+                <p>Latest community survey reveals that 85% of S&FEET holders have "diamond feet" and refuse to sell despite massive gains. Community member @ToeMoonLambo commented: "These aren't just investments, they're stepping stones to generational wealth!" The average hold time has increased to 147 days, showing unprecedented community dedication.</p>
             </div>
             
             <div class="ad-banner">
                 🔥 HOT TIP: BUY THE DIP ON PINKY TOE FUTURES! 🔥<br>
-                Limited Time Offer - 50% Bonus Tokens!
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 20px; margin: 20px 0;">
-                <h3 style="text-align: center; color: #ff006e; font-family: 'Orbitron', monospace; margin-bottom: 15px;">🦶 FEET PONG GAME 🦶</h3>
-                <canvas id="feetPongCanvas" width="400" height="200" style="width: 100%; max-width: 400px; border: 2px solid #ff006e; border-radius: 10px; background: #000; display: block; margin: 0 auto;"></canvas>
-                <div style="text-align: center; margin-top: 10px; color: rgba(255, 255, 255, 0.8); font-size: 12px;">
-                    Use mouse to control your foot paddle! Score points to earn SFEET tokens!*<br>
-                    <span style="font-size: 10px;">*Not actually, this is just for fun</span>
-                </div>
-                <div id="gameScore" style="text-align: center; margin-top: 10px; font-family: 'Orbitron', monospace; color: #00ff41; font-weight: bold;">Score: 0 | High Score: 0</div>
+                Limited Time Offer - 50% Bonus Tokens!<br>
+                Code: FOOTGANG50
             </div>
             
             <div class="news-item">
-                <div class="news-title">📊 Weekly Foot Market Analysis: Bullish Signals Everywhere</div>
-                <div class="news-date">Posted: May 26, 2025 - 4:45 PM EST</div>
-                <p>Technical analysis shows strong support at the $0.005 level with fibonacci retracements pointing to $0.01 by month end. The "Golden Toe Cross" formation on the daily chart suggests we're entering a new super cycle. Institutional adoption growing with PediCorp announcing 10% portfolio allocation.</p>
+                <div class="news-title">📊 Weekly Foot Market Analysis: Golden Cross Formation Confirmed</div>
+                <div class="news-date">Posted: June 26, 2025 - 4:45 PM EST</div>
+                <p>Technical analysis shows the coveted "Golden Toe Cross" formation on the daily chart, with the 50-day moving average crossing above the 200-day MA. Strong support established at $0.005 level with fibonacci retracements pointing to $0.01 by month end. Institutional adoption growing rapidly with PediCorp announcing 10% portfolio allocation and Foot Locker exploring payment integration.</p>
             </div>
             
             <div class="news-item">
                 <div class="news-title">🏆 S&FEET Named "Meme Coin of the Year" by CryptoFeet Magazine</div>
-                <div class="news-date">Posted: May 25, 2025 - 9:00 AM EST</div>
-                <p>In a surprise announcement, CryptoFeet Magazine has awarded S&FEET 6900 the prestigious "Golden Sole Award" for innovation in decentralized finance. Editor-in-chief Sarah Pumps noted: "S&FEET has successfully bridged the gap between traditional index investing and modern meme culture."</p>
+                <div class="news-date">Posted: June 25, 2025 - 9:00 AM EST</div>
+                <p>In a surprise announcement, CryptoFeet Magazine has awarded S&FEET 6900 the prestigious "Golden Sole Award" for innovation in decentralized finance. Editor-in-chief Sarah Pumps noted: "S&FEET has successfully bridged the gap between traditional index investing and modern meme culture. Their community engagement metrics are off the charts, with a 420% increase in social mentions this month."</p>
             </div>
             
             <div class="news-item">
                 <div class="news-title">🤝 Major Partnership: S&FEET Teams Up with Dr. Scholl's</div>
-                <div class="news-date">Posted: May 24, 2025 - 2:20 PM EST</div>
-                <p>Breaking: Dr. Scholl's announces strategic partnership with S&FEET 6900, planning to accept SFEET tokens for all online purchases. CEO John Comfort stated: "This partnership represents the future of foot care payments. We're excited to step into the crypto space."</p>
+                <div class="news-date">Posted: June 24, 2025 - 2:20 PM EST</div>
+                <p>Breaking: Dr. Scholl's announces strategic partnership with S&FEET 6900, planning to accept SFEET tokens for all online purchases starting Q3 2025. CEO John Comfort stated: "This partnership represents the future of foot care payments. We're excited to step into the crypto space with such an innovative project. Customers will receive 10% discounts when paying with SFEET."</p>
             </div>
             
             <div style="text-align: center; margin: 15px 0;">
@@ -577,8 +831,77 @@
             
             <div class="news-item">
                 <div class="news-title">🔥 Whale Alert: Mystery Buyer Accumulates 69 Million SFEET</div>
-                <div class="news-date">Posted: May 23, 2025 - 7:30 PM EST</div>
-                <p>Blockchain analysts report massive accumulation by wallet address 0xF33T...showing purchase of 69,420,000 SFEET tokens worth approximately $480,000. Community speculates this could be a major fund or celebrity entering the space. Bullish sentiment intensifies.</p>
+                <div class="news-date">Posted: June 23, 2025 - 7:30 PM EST</div>
+                <p>Blockchain analysts report massive accumulation by wallet address 0xF33T...6900 showing purchase of 69,420,000 SFEET tokens worth approximately $480,000 at current prices. On-chain data suggests this could be institutional money or a high-profile celebrity entering the space. The community has dubbed this whale "Big Foot" and bullish sentiment continues to intensify across all social platforms.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">🎮 S&FEET Gaming Metaverse Announced: "Foot Valley"</div>
+                <div class="news-date">Posted: June 22, 2025 - 1:15 PM EST</div>
+                <p>The S&FEET team has unveiled plans for "Foot Valley," a revolutionary play-to-earn metaverse where players can buy virtual land, breed digital feet NFTs, and participate in toe-based mini-games. Alpha testing begins July 15th for SFEET holders with over 100,000 tokens. Lead developer John Heel stated: "This isn't just gaming, it's the future of foot-based entertainment."</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">💰 Staking Rewards Program Launches: Earn 420% APY</div>
+                <div class="news-date">Posted: June 21, 2025 - 10:30 AM EST</div>
+                <p>S&FEET has launched their highly anticipated staking program on their official DApp. Early stakers can earn up to 420% APY for the first month, with rewards distributed in SFEET tokens. The program features flexible lock periods from 30 days to 1 year, with higher APY for longer commitments. Over $2M worth of SFEET has already been staked in the first 24 hours.</p>
+            </div>
+            
+            <h2 id="roadmap" style="margin-top: 40px;">🗺️ ROADMAP TO THE MOON 🗺️</h2>
+            
+            <div class="roadmap-item completed">
+                <div class="roadmap-title">✅ Q1 2025 - Foundation Phase</div>
+                <div>Token launch, initial community building, first 10K holders, basic website launch</div>
+            </div>
+            
+            <div class="roadmap-item completed">
+                <div class="roadmap-title">✅ Q2 2025 - Growth Phase</div>
+                <div>Major exchange listings, partnerships with foot care brands, 50K holder milestone</div>
+            </div>
+            
+            <div class="roadmap-item in-progress">
+                <div class="roadmap-title">🚧 Q3 2025 - Expansion Phase (In Progress)</div>
+                <div>Metaverse launch, NFT collection, staking platform, mobile app beta</div>
+            </div>
+            
+            <div class="roadmap-item">
+                <div class="roadmap-title">📅 Q4 2025 - Domination Phase</div>
+                <div>Global partnerships, TV advertisements, 1M holders, $1 target price</div>
+            </div>
+            
+            <div class="roadmap-item">
+                <div class="roadmap-title">🌙 2026 - Moon Phase</div>
+                <div>IPO consideration, real-world utility expansion, interplanetary adoption</div>
+            </div>
+            
+            <h2 id="team" style="margin-top: 40px;">👥 MEET THE TEAM 👥</h2>
+            
+            <div class="team-member">
+                <div class="team-avatar">👨‍💼</div>
+                <div class="team-name">Chad Toeington</div>
+                <div class="team-role">CEO & Founder</div>
+                <div style="font-size: 12px; margin-top: 5px;">Former Goldman Sachs, Harvard MBA, Foot enthusiast since birth</div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-avatar">👩‍💻</div>
+                <div class="team-name">Sarah Heelsworth</div>
+                <div class="team-role">CTO & Lead Developer</div>
+                <div style="font-size: 12px; margin-top: 5px;">Ex-Google engineer, Built first blockchain for feet, MIT PhD</div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-avatar">📈</div>
+                <div class="team-name">Dr. Arch Support</div>
+                <div class="team-role">Chief Financial Analyst</div>
+                <div style="font-size: 12px; margin-top: 5px;">25 years Wall Street experience, Discovered the Golden Toe Cross</div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-avatar">🎨</div>
+                <div class="team-name">Pablo Toecasso</div>
+                <div class="team-role">Creative Director</div>
+                <div style="font-size: 12px; margin-top: 5px;">Award-winning designer, Creates the most beautiful foot art</div>
             </div>
         </div>
         
@@ -586,12 +909,13 @@
             <h3>💰 INVEST NOW!</h3>
             <div style="text-align: center; margin: 15px 0;">
                 <strong style="color: #FF6B35; font-size: 24px;">$0.0069</strong><br>
-                <span style="color: green; font-weight: bold;">+420.69% (24h)</span>
+                <span style="color: green; font-weight: bold;">+420.69% (24h)</span><br>
+                <span style="color: #00ff41; font-size: 12px;">Volume: $69.42M</span>
             </div>
             
             <div class="ad-banner">
                 🚀 BUY SFEET NOW! 🚀<br>
-                Before It Hits $1!<br>
+                Before Binance Listing!<br>
                 Not Financial Advice*
             </div>
             
@@ -600,12 +924,21 @@
                 • Short Term: $0.01<br>
                 • Medium Term: $0.10<br>
                 • Long Term: $1.00<br>
-                • Moon Term: $69.00
+                • Moon Term: $69.00<br>
+                • Mars Term: $420.00
             </div>
             
-            <div style="background: #FFFFCC; padding: 10px; border: 1px solid #999; margin: 15px 0; border-radius: 5px;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <strong>🔥 FEAR & GREED INDEX</strong><br>
+                <div style="background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00); height: 10px; border-radius: 5px; margin: 10px 0; position: relative;">
+                    <div style="position: absolute; right: 10%; top: -5px; width: 4px; height: 20px; background: white; border-radius: 2px;"></div>
+                </div>
+                <div style="text-align: center; color: #00ff41; font-weight: bold;">EXTREME GREED (89)</div>
+            </div>
+            
+            <div style="background: #FFFFCC; color: #000; padding: 10px; border: 1px solid #999; margin: 15px 0; border-radius: 5px;">
                 <strong>⚠️ DISCLAIMER:</strong><br>
-                This is not financial advice. This is podiatric advice. Past foot performance does not guarantee future toe results.
+                This is not financial advice. This is podiatric advice. Past foot performance does not guarantee future toe results. Please DYOR (Do Your Own Research).
             </div>
             
             <div class="ad-banner">
@@ -616,13 +949,46 @@
             </div>
             
             <div style="margin: 15px 0; text-align: center;">
-                <div style="background: #000; color: #00FF00; padding: 5px; font-family: monospace;">
+                <div style="background: #000; color: #00FF00; padding: 5px; font-family: monospace; border-radius: 5px 5px 0 0;">
                     HODL CALCULATOR
                 </div>
-                <div style="border: 1px solid #000; padding: 10px;">
+                <div style="border: 1px solid #00FF00; padding: 10px; border-radius: 0 0 5px 5px; background: rgba(0, 255, 0, 0.1);">
                     If you bought $100 of SFEET<br>
                     on January 1st, 2025...<br>
-                    <strong style="color: green;">You'd have $42,069 today!</strong>
+                    <strong style="color: green; font-size: 18px;">You'd have $42,069 today!</strong><br>
+                    <span style="font-size: 10px;">That's a 42,069% gain!</span>
+                </div>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-header">
+                    💬 LIVE CHAT
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message other">
+                        <div class="username">ToeMoonLambo</div>
+                        <div>Just bought another 100k SFEET! 🚀</div>
+                        <div class="timestamp">3:45 PM</div>
+                    </div>
+                    <div class="message other">
+                        <div class="username">FootWhale</div>
+                        <div>Binance listing confirmed! We're going to $0.01!</div>
+                        <div class="timestamp">3:46 PM</div>
+                    </div>
+                    <div class="message other">
+                        <div class="username">DiamondToes</div>
+                        <div>HODLING since $0.001, never selling! 💎👣</div>
+                        <div class="timestamp">3:47 PM</div>
+                    </div>
+                    <div class="message other">
+                        <div class="username">ArchSupporter</div>
+                        <div>Technical analysis looking bullish AF</div>
+                        <div class="timestamp">3:48 PM</div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." maxlength="200">
+                    <button class="chat-send-btn" id="chatSendBtn">▶</button>
                 </div>
             </div>
         </div>
@@ -631,219 +997,214 @@
     <div class="footer">
         <p>© 2025 S&FEET 6900 Index Fund | Not affiliated with Standard & Poor's | This is a parody website for entertainment purposes only</p>
         <p>🦶 Remember: Always DYOR (Do Your Own Research) and never invest more than you can afford to lose! 🦶</p>
+        <p>Contract Address: 0xF33769004206900000420SFEETMOON | Total Supply: 6,900,000,000 SFEET</p>
+        <div style="margin-top: 15px;">
+            <a href="mailto:support@sfeet6900.com" style="color: #ff006e; text-decoration: none;">📧 support@sfeet6900.com</a> | 
+            <a href="tel:1-800-GET-FEET" style="color: #ff006e; text-decoration: none;">📞 1-800-GET-FEET</a>
+        </div>
         <div style="margin-top: 10px; font-size: 12px;">
-            Best viewed in Internet Explorer 6.0 | Optimized for 1024x768 resolution
+            Best viewed in Internet Explorer 6.0 | Optimized for 1024x768 resolution | Flash Player Required
         </div>
     </div>
     
     <script>
-        // Feet Pong Game
-        const canvas = document.getElementById('feetPongCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Game variables
-        let gameRunning = true;
-        let score = 0;
-        let highScore = localStorage.getItem('feetPongHighScore') || 0;
-        
-        // Game objects
-        const ball = {
-            x: canvas.width / 2,
-            y: canvas.height / 2,
-            radius: 8,
-            speedX: 3,
-            speedY: 2,
-            color: '#ff006e'
-        };
-        
-        const playerPaddle = {
-            x: 10,
-            y: canvas.height / 2 - 30,
-            width: 15,
-            height: 60,
-            speed: 5,
-            color: '#00ff41'
-        };
-        
-        const aiPaddle = {
-            x: canvas.width - 25,
-            y: canvas.height / 2 - 30,
-            width: 15,
-            height: 60,
-            speed: 2,
-            color: '#8338ec'
-        };
-        
-        // Mouse control
-        let mouseY = 0;
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mouseY = ((e.clientY - rect.top) * canvas.height) / rect.height;
-        });
-        
-        // Game functions
-        function drawFoot(x, y, size, color) {
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            // Draw foot shape
-            ctx.ellipse(x, y, size * 0.7, size * 0.4, 0, 0, Math.PI * 2);
-            ctx.fill();
-            // Draw toes
-            for (let i = 0; i < 5; i++) {
-                ctx.beginPath();
-                ctx.arc(x - size * 0.4 + i * size * 0.2, y - size * 0.3, size * 0.1, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        function drawBall() {
-            ctx.fillStyle = ball.color;
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Add glow effect
-            ctx.shadowColor = ball.color;
-            ctx.shadowBlur = 10;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }
-        
-        function drawPaddles() {
-            // Player paddle (foot)
-            drawFoot(playerPaddle.x + 7, playerPaddle.y + playerPaddle.height/2, 20, playerPaddle.color);
-            
-            // AI paddle (foot)
-            drawFoot(aiPaddle.x + 7, aiPaddle.y + aiPaddle.height/2, 20, aiPaddle.color);
-        }
-        
-        function updateGame() {
-            if (!gameRunning) return;
-            
-            // Clear canvas
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Update player paddle position
-            playerPaddle.y = mouseY - playerPaddle.height / 2;
-            if (playerPaddle.y < 0) playerPaddle.y = 0;
-            if (playerPaddle.y > canvas.height - playerPaddle.height) 
-                playerPaddle.y = canvas.height - playerPaddle.height;
-            
-            // Update AI paddle (simple AI)
-            const aiTarget = ball.y - aiPaddle.height / 2;
-            if (aiPaddle.y < aiTarget) aiPaddle.y += aiPaddle.speed;
-            if (aiPaddle.y > aiTarget) aiPaddle.y -= aiPaddle.speed;
-            
-            // Update ball position
-            ball.x += ball.speedX;
-            ball.y += ball.speedY;
-            
-            // Ball collision with top/bottom walls
-            if (ball.y <= ball.radius || ball.y >= canvas.height - ball.radius) {
-                ball.speedY = -ball.speedY;
+        // Live Chat Functionality
+        class LiveChat {
+            constructor() {
+                this.messages = [];
+                this.username = this.generateUsername();
+                this.chatMessages = document.getElementById('chatMessages');
+                this.chatInput = document.getElementById('chatInput');
+                this.chatSendBtn = document.getElementById('chatSendBtn');
+                
+                this.initializeChat();
+                this.setupEventListeners();
+                this.startBotMessages();
             }
             
-            // Ball collision with player paddle
-            if (ball.x - ball.radius <= playerPaddle.x + playerPaddle.width &&
-                ball.y >= playerPaddle.y && ball.y <= playerPaddle.y + playerPaddle.height &&
-                ball.speedX < 0) {
-                ball.speedX = -ball.speedX;
-                ball.speedX *= 1.05; // Increase speed slightly
-                score += 10;
+            generateUsername() {
+                const adjectives = ['Diamond', 'Golden', 'Silver', 'Platinum', 'Cosmic', 'Legendary', 'Epic', 'Mega', 'Ultra', 'Super'];
+                const nouns = ['Toe', 'Foot', 'Heel', 'Arch', 'Sole', 'Ankle', 'Digits', 'Paw', 'Hoof', 'Step'];
+                const numbers = Math.floor(Math.random() * 9999);
+                return `${adjectives[Math.floor(Math.random() * adjectives.length)]}${nouns[Math.floor(Math.random() * nouns.length)]}${numbers}`;
             }
             
-            // Ball collision with AI paddle
-            if (ball.x + ball.radius >= aiPaddle.x &&
-                ball.y >= aiPaddle.y && ball.y <= aiPaddle.y + aiPaddle.height &&
-                ball.speedX > 0) {
-                ball.speedX = -ball.speedX;
+            initializeChat() {
+                // Add some initial bot messages
+                const initialMessages = [
+                    { username: 'ToeMoonLambo', message: 'Just bought another 100k SFEET! 🚀', time: '3:45 PM', isOwn: false },
+                    { username: 'FootWhale', message: 'Binance listing confirmed! We\'re going to $0.01!', time: '3:46 PM', isOwn: false },
+                    { username: 'DiamondToes', message: 'HODLING since $0.001, never selling! 💎👣', time: '3:47 PM', isOwn: false },
+                    { username: 'ArchSupporter', message: 'Technical analysis looking bullish AF', time: '3:48 PM', isOwn: false }
+                ];
+                
+                initialMessages.forEach(msg => this.addMessage(msg.username, msg.message, msg.time, msg.isOwn));
             }
             
-            // Ball out of bounds (player scores)
-            if (ball.x > canvas.width + ball.radius) {
-                score += 50;
-                resetBall();
+            setupEventListeners() {
+                this.chatSendBtn.addEventListener('click', () => this.sendMessage());
+                this.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendMessage();
+                    }
+                });
             }
             
-            // Ball out of bounds (AI scores - game over)
-            if (ball.x < -ball.radius) {
-                gameOver();
-                return;
-            }
-            
-            // Draw everything
-            drawBall();
-            drawPaddles();
-            
-            // Update score display
-            updateScoreDisplay();
-        }
-        
-        function resetBall() {
-            ball.x = canvas.width / 2;
-            ball.y = Math.random() * (canvas.height - 40) + 20;
-            ball.speedX = -Math.abs(ball.speedX); // Always go left initially
-            ball.speedY = (Math.random() - 0.5) * 4;
-        }
-        
-        function gameOver() {
-            gameRunning = false;
-            if (score > highScore) {
-                highScore = score;
-                try {
-                    localStorage.setItem('feetPongHighScore', highScore);
-                } catch(e) {
-                    // localStorage not available, ignore
+            sendMessage() {
+                const message = this.chatInput.value.trim();
+                if (message) {
+                    const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    this.addMessage(this.username, message, currentTime, true);
+                    this.chatInput.value = '';
+                    
+                    // Simulate bot response after a delay
+                    setTimeout(() => this.generateBotResponse(message), Math.random() * 3000 + 1000);
                 }
             }
             
-            // Draw game over screen
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#ff006e';
-            ctx.font = '20px Orbitron';
-            ctx.textAlign = 'center';
-            ctx.fillText('GAME OVER!', canvas.width/2, canvas.height/2 - 20);
-            
-            ctx.fillStyle = '#00ff41';
-            ctx.font = '14px Orbitron';
-            ctx.fillText('Click to restart', canvas.width/2, canvas.height/2 + 10);
-            
-            ctx.fillStyle = '#fff';
-            ctx.font = '12px Orbitron';
-            ctx.fillText(`Final Score: ${score}`, canvas.width/2, canvas.height/2 + 30);
-        }
-        
-        function restartGame() {
-            gameRunning = true;
-            score = 0;
-            ball.speedX = 3;
-            ball.speedY = 2;
-            resetBall();
-        }
-        
-        function updateScoreDisplay() {
-            document.getElementById('gameScore').textContent = `Score: ${score} | High Score: ${highScore}`;
-        }
-        
-        // Click to restart
-        canvas.addEventListener('click', () => {
-            if (!gameRunning) {
-                restartGame();
+            addMessage(username, message, time, isOwn = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isOwn ? 'own' : 'other'}`;
+                
+                if (!isOwn) {
+                    messageDiv.innerHTML = `
+                        <div class="username">${username}</div>
+                        <div>${message}</div>
+                        <div class="timestamp">${time}</div>
+                    `;
+                } else {
+                    messageDiv.innerHTML = `
+                        <div>${message}</div>
+                        <div class="timestamp">${time}</div>
+                    `;
+                }
+                
+                this.chatMessages.appendChild(messageDiv);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                
+                // Remove old messages if too many
+                while (this.chatMessages.children.length > 50) {
+                    this.chatMessages.removeChild(this.chatMessages.firstChild);
+                }
             }
-        });
-        
-        // Start the game loop
-        function gameLoop() {
-            updateGame();
-            requestAnimationFrame(gameLoop);
+            
+            generateBotResponse(userMessage) {
+                const responses = [
+                    'Welcome to the SFEET family! 🦶',
+                    'TO THE MOON! 🚀🌙',
+                    'Diamond hands only! 💎',
+                    'This is just the beginning!',
+                    'HODL strong, feet family!',
+                    'Best investment of my life!',
+                    'Can\'t wait for $0.01!',
+                    'Buying more on every dip!',
+                    'SFEET changed my life!',
+                    'When Lambo? When Moon? Now SFEET! 🦶',
+                    'Feet gang unite! 👣',
+                    'Never selling, only buying!',
+                    'This community is amazing!',
+                    'SFEET to $69! LFG! 🚀',
+                    'Golden cross confirmed! 📈'
+                ];
+                
+                const botUsernames = ['CryptoFeet', 'ToeLord', 'HeelMaster', 'SoleSearcher', 'ArchAngel', 'FootprintFollower', 'ToenailTrader', 'AnkleInvestor'];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                const randomUsername = botUsernames[Math.floor(Math.random() * botUsernames.length)];
+                const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                this.addMessage(randomUsername, randomResponse, currentTime, false);
+            }
+            
+            startBotMessages() {
+                // Generate random bot messages every 10-30 seconds
+                setInterval(() => {
+                    if (Math.random() > 0.3) { // 70% chance to send a message
+                        this.generateBotResponse('');
+                    }
+                }, Math.random() * 20000 + 10000);
+            }
         }
         
-        // Initialize
-        updateScoreDisplay();
-        gameLoop();
+        // Price ticker update
+        function updatePriceTicker() {
+            const prices = {
+                SFEET: { price: 0.0069, change: 420.69 },
+                TOE: { price: 13.37, change: 69 },
+                HEEL: { price: 25.00, change: 100 },
+                BIGTOE: { price: 4.20, change: 50 },
+                ANKLE: { price: 7.77, change: 33 },
+                ARCH: { price: 12.34, change: 25 },
+                TOENAIL: { price: 0.42, change: 15 }
+            };
+            
+            // Add some random fluctuation
+            Object.keys(prices).forEach(key => {
+                const fluctuation = (Math.random() - 0.5) * 0.1; // ±5% fluctuation
+                prices[key].price *= (1 + fluctuation);
+                prices[key].change += (Math.random() - 0.5) * 10;
+                
+                // Keep prices positive and reasonable
+                prices[key].price = Math.max(0.001, prices[key].price);
+                prices[key].change = Math.max(-99, Math.min(999, prices[key].change));
+            });
+            
+            const tickerText = Object.entries(prices).map(([name, data]) => 
+                `${name}: ${data.price.toFixed(name === 'SFEET' || name === 'TOENAIL' ? 4 : 2)} (${data.change > 0 ? '+' : ''}${data.change.toFixed(2)}%)`
+            ).join(' | ');
+            
+            document.querySelector('.ticker-text').textContent = tickerText;
+        }
+        
+        // Update visitor counter
+        function updateVisitorCounter() {
+            const counter = document.querySelector('.visitor-counter');
+            const currentCount = parseInt(counter.textContent.split(': ')[1].replace(/,/g, ''));
+            const newCount = currentCount + Math.floor(Math.random() * 10) + 1;
+            counter.textContent = `VISITORS: ${newCount.toLocaleString()}`;
+        }
+        
+        // Update online counter
+        function updateOnlineCounter() {
+            const counter = document.querySelector('.online-counter');
+            const baseCount = 6969;
+            const fluctuation = Math.floor(Math.random() * 200) - 100;
+            const newCount = Math.max(baseCount + fluctuation, 5000);
+            counter.textContent = `👥 ONLINE NOW: ${newCount.toLocaleString()}`;
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize live chat
+            new LiveChat();
+            
+            // Update counters periodically
+            setInterval(updatePriceTicker, 5000); // Update prices every 5 seconds
+            setInterval(updateVisitorCounter, 30000); // Update visitor count every 30 seconds
+            setInterval(updateOnlineCounter, 10000); // Update online count every 10 seconds
+            
+            // Add click effects to buttons
+            document.querySelectorAll('.ad-banner, .guestbook-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
